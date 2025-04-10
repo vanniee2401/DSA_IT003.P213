@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int UuTienToanTu(char dau)
+double UuTienToanTu(char dau)
 {
     if (dau == '+' || dau == '-')
         return 1;
@@ -10,7 +10,7 @@ int UuTienToanTu(char dau)
     return 0;
 }
 
-int ThemDau(int a, int b, char dau)
+double ThemDau(double a, double b, char dau)
 {
     switch (dau)
     {
@@ -26,16 +26,16 @@ int ThemDau(int a, int b, char dau)
     return 0;
 }
 
-int XuLi(const string &s)
+double XuLi(const string &s)
 {
-    stack<int> GiaTri;
+    stack<double> GiaTri;
     stack<char> KiHieu;
-    int i = 0;
+    double i = 0;
     while (i < s.length())
     {
         if (isdigit(s[i]))
         {
-            int val = 0;
+            double val = 0;
             while (i < s.length() && isdigit(s[i]))
             {
                 val = val * 10 + (s[i] - '0');
@@ -52,9 +52,9 @@ int XuLi(const string &s)
         {
             while (!KiHieu.empty() && KiHieu.top() != '(')
             {
-                int b = GiaTri.top();
+                double b = GiaTri.top();
                 GiaTri.pop();
-                int a = GiaTri.top();
+                double a = GiaTri.top();
                 GiaTri.pop();
                 char op = KiHieu.top();
                 KiHieu.pop();
@@ -67,9 +67,9 @@ int XuLi(const string &s)
         {
             while (!KiHieu.empty() && UuTienToanTu(KiHieu.top()) >= UuTienToanTu(s[i]))
             {
-                int b = GiaTri.top();
+                double b = GiaTri.top();
                 GiaTri.pop();
-                int a = GiaTri.top();
+                double a = GiaTri.top();
                 GiaTri.pop();
                 char op = KiHieu.top();
                 KiHieu.pop();
@@ -82,9 +82,9 @@ int XuLi(const string &s)
 
     while (!KiHieu.empty())
     {
-        int b = GiaTri.top();
+        double b = GiaTri.top();
         GiaTri.pop();
-        int a = GiaTri.top();
+        double a = GiaTri.top();
         GiaTri.pop();
         char op = KiHieu.top();
         KiHieu.pop();
@@ -98,6 +98,7 @@ int main()
 {
     string s;
     cin >> s;
+    cout.precision(10);
     cout << XuLi(s) << endl;
     return 0;
 }
